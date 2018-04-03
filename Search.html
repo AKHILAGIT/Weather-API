@@ -1,65 +1,75 @@
+Skip to content
+Enterprise
+This repository
+Search
+Pull requests
+Issues
+Explore
+ @mekava
+ Sign out
+1
+0 0 mekava/AKHILA-CLOUD-HW2
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+AKHILA-CLOUD-HW2/weather.html
+45a1bc0  13 days ago
+@mekava mekava Assignmen3 API UI
+     
+111 lines (83 sloc)  2.89 KB
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="addd.css">
 <style>
-.chartjs-render-monitor{
-	color:black;	
-	padding-right: 250px;
-	text-align: left;
-	
+h1 {
+    border-bottom: 5px solid  green;
+    color: green;
 }
 body {
     
-    background-image: url("http://wlpapers.com/images/light-blue-background-1.jpg");
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThbguRcbHtZ2__JSBN52gjzSg_zP8ZaW87sbNSfzwSsk44S-pFrA	");
+	background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: inherit;
+    background-repeat: no repeat;
 }
-
 </style>
-<title>Weather Details Plot</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<title>WEATHER INFO</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </head>
 
 <body>
-
-
-<h1 style="text-align: center;color: red;">Weather Details : Cincinnati,OH.</h1>
-<h2 style="text-align: center;color: red;">Enter the date to get the next five days prediction</h2><br>
-<div style="padding-left: 550px">
-    <input type="date" class="form-control" id="exampleInputPassword1" min="2013-01-01" style="width: 300px;">  
-  <button   type="button" onclick="loadDoc()" class="btn btn-primary">Get the Plot for next five days forecast</button> 
-  </div> <br>
-    <canvas id="plot" width="10" height="25" style="padding-left: 350px;padding-bottom: 250px;padding-right: 300px"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+ 
+      <h1><center>Weather Forecast @CINCINNATI</center></h1>
+      
+		<h2 style="text-align: center;">Select a date to predict the next 5 days Temperature</h2>
+	<div style="text-align: center;" class="center">      
+	<input type="date" id="WethDate">
 	
-	<div style="padding-left: 550px">
-	<button type="button" onclick="loadTPDoc()" class="btn btn-primary">Get the Plot for Third Party Forecast</button>
-	 </div>
-	<canvas id="tpplot" width="10" height="25" style="padding-left: 350px;padding-bottom: 200px;padding-right: 250px;"></canvas>
+	<button onclick="loadTemp()">PREDICT</button>
 	
+	</div>
+	<br>
+	<canvas id="tempplot" width="10" height="25" style="padding-bottom: 200px;padding-right: 550px;"></canvas>
+    
+
 <script>
-function loadDoc() {
-	 var canvas1 = document.getElementById("plot");
-	 var context=canvas1.getContext('2d');
+function loadTemp() {
+	var canvas1 = document.getElementById("tempplot");
 	 canvas1.style.width = 20;
 	 canvas1.style.height = 10;
 	 canvas1.width = 50;
 	 canvas1.height = 25;
-	 var ctx = canvas1.getContext("2d");
-	 ctx.fillStyle = "#c3c3c3";
-	 
-	 
-  var xhttp = new XMLHttpRequest();
+	/* var data_file = "/data.json"; */
+  var xhttp = new XMLHttpRequest(); 
+  
   xhttp.onreadystatechange = function(){
 		
       if (xhttp.readyState == 4  ){
-         
+         // Javascript function JSON.parse to parse JSON data
          var jsonObj = JSON.parse(xhttp.responseText);
+        
+         
          var date = [];
          var tMax =[];
          var tMin=[];
@@ -71,7 +81,10 @@ function loadDoc() {
         	 	
          }
          
-          var ctx = document.getElementById("plot");
+         /* document.getElementById("demo").innerHTML = date; */
+         
+          
+          var ctx = document.getElementById("tempplot");
           var myChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -79,81 +92,30 @@ function loadDoc() {
               datasets: [
             	  { 
             		  data: tMax,
-            		  label: "MAX TEMPERATURE",
-            		  borderColor: "#ff0066",
+            		  label: "TEMPMAX",
+            		  borderColor: "#FF1493",
             		  fill: false
             		},
             		{ 
             			  data: tMin,
-            			  label: "MIN TEMPERATURE",
-            			  borderColor: "#ffff00",
+            			  label: "TEMPMIN",
+            			  borderColor: "#7CFC00",
             			  fill: false
             			}
               ]
             }
           });
- 		 }
+         
+         
+      }
    }
-  
-  var apiLink="http://localhost:8080/RestAPInew/weather/forecast/"+document.getElementById("exampleInputPassword1").value.replace("-", "").replace("-", "");
-  xhttp.open("GET", apiLink, true);
+  var apiLink="http://ec2-18-188-38-228.us-east-2.compute.amazonaws.com:8080/weather/forecast/"+document.getElementById("WethDate").value.replace("-", "").replace("-", ""); 
+  /* document.getElementById("demo").innerHTML = apiLink; */
+   xhttp.open("GET", apiLink, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(); 
 }
+ </script>
 
-
-
-  function loadTPDoc() {
- 
- var canvas = document.getElementById("tpplot");
-canvas.style.width = 20;
-canvas.style.height = 10;
-canvas.width = 50;
-canvas.height = 25;
-	  var xmlhttp = new XMLHttpRequest();
-	  xmlhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 ) {
-	      var jsonObj = JSON.parse(xmlhttp.responseText);
-	      var dateTP =[];
-		  var TmaxTP=[];
-		  var TminTP=[];
-		  for (i = 0; i < 5; i++) {
-				dateTP.push(jsonObj.forecast.simpleforecast.forecastday[i].date.year+"0"+jsonObj.forecast.simpleforecast.forecastday[i].date.month+""+jsonObj.forecast.simpleforecast.forecastday[i].date.day);
-	        	TmaxTP.push(jsonObj.forecast.simpleforecast.forecastday[i].high.fahrenheit);
-	        	TminTP.push(jsonObj.forecast.simpleforecast.forecastday[i].low.fahrenheit);
-		}
-		  
-		  var ctx1 = document.getElementById("tpplot");
-	          var tpChart = new Chart(ctx1, {
-	            type: 'line',
-	            data: {
-	              labels: dateTP,
-	              datasets: [
-	            	  { 
-	            		  data: TmaxTP,
-	            		  label: "MAX TEMPERATURE",
-	            		  borderColor: "#ff0066",
-	            		  fill: false
-	            		},
-	            		{ 
-	            			  data: TminTP,
-	            			  label: "MIN TEMPERATURE",
-	            			  borderColor: "#ffff00",
-	            			  fill: false
-	            			}
-	              ]
-	            }
-	          });
-	    
-		}
-	  };
-	    xmlhttp.open("GET","http://api.wunderground.com/api/631353b7a14e807a/forecast10day/q/OH/Cincinnati.json", true);
-	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	  xmlhttp.send();
-	}
-  </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

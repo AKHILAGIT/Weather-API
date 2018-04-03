@@ -23,11 +23,8 @@ As a second step let us add Jersey Framework and its dependencies (libraries) in
 2. You need to create a Web xml Configuration file which is an XML file and is used to specify Jersey framework servlet for our application.
 3. Once you are done with creating source and web configuration files, you are ready for this step which is compiling and running your program. To do this, using Eclipse, export your application as a war file and deploy the same in tomcat.
 
- All Dates                 - http://ec2-18-219-157-52.us-east-2.compute.amazonaws.com:8080/weather/historical/   
+ All Dates                 - http://ec2-18-219-253-211.us-east-2.compute.amazonaws.com/RestAPIUI/weather/historical/   
 
-specific date - http://ec2-18-219-157-52.us-east-2.compute.amazonaws.com:8080/weather/historical/20180102   
+specific date -    http://ec2-18-219-253-211.us-east-2.compute.amazonaws.com/RestAPIUI/weather/historical/20140301
 
-Insert info.  date   - http://ec2-18-219-157-52.us-east-2.compute.amazonaws.com:8080/weather/historical/   
-
-Delete info. date   - http://ec2-18-219-157-52.us-east-2.compute.amazonaws.com:8080/weather/historical/20180102 
 

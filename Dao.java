@@ -16,7 +16,7 @@ public class Dao {
 	final static String DriverName="oracle.jdbc.driver.OracleDriver";
 	final static String URL="jdbc:oracle:thin:@oracledb.co1i88lxl3vs.us-east-2.rds.amazonaws.com:1521:oracleDB";
 	final static String username="rootsystem";
-	final static String password="harsha123";
+	final static String password="akhila123";
 	
 	public static List<PointBean> fetch() throws ClassNotFoundException,SQLException{
 		

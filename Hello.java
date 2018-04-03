@@ -64,7 +64,7 @@ public class Hello {
 	}
 	
 	@DELETE
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{date}")
 	public String tempDel(@PathParam("date") String dt) throws ClassNotFoundException, SQLException{
 		return Dao.deleteTemp(dt);	

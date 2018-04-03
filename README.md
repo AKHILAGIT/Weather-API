@@ -1,6 +1,6 @@
 # Weather-API
 
-Weathaer Forecast URL: http://ec2-18-188-38-228.us-east-2.compute.amazonaws.com:8080/weather.html
+Weathaer Forecast URL: http://ec2-18-219-253-211.us-east-2.compute.amazonaws.com/RestAPIUI/weather.html
 For Assignment an addition HTML file was written to forecast weather and plot graph.
 
 
